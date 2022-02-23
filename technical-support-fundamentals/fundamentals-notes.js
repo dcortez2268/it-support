@@ -1,10 +1,10 @@
+/*
 //*************************************************************************************************** 
 //  Title: Technical Support Fundamentals Course
 //  Author: Google, completed on courseera.com
 //  Part 1 of 5
 //***************************************************************************************************
 
-/*
 //*************************************************************************************************** 
 //  SUPPLUMENTAL RESOURCES
 //***************************************************************************************************
@@ -34,7 +34,8 @@ algorithm: series of steps that solve specific problems,
 cryptography: the art of writing and solving codes,
 open-source code: code that can be viewed, shared, or modified by anybody,
 binary system: the communication that a computer uses, also known as a base-2 numeral system,
-bits: binary digit, either a 0 or 1
+bits: binary digit, either a 0 or 1, smallest representation of data that a computer can understand.  a 1 represents true while a 0 represents false,
+
 byte: a group of 8 bits,
 character encoding: assigns our binary values to characters, so that we as humans can read them,
 ascii: first popular character encoding standard,
@@ -47,6 +48,11 @@ file extension: the appended part of a filename that tells us what type of file 
 process: a program that's executing, like our internet browser or text editor,
 program: an application that we can run, like chrome,
 time slice: a very short interval of time that gets allocated to a process for cpu execution,
+hexadecimal: a way to represent numbers using 16 digits, letters abcdef represent 10.11.12.13.14.15,
+octet: any number that can be represented by 8 bits,
+dotted decimal notation: four octets represented by decimal numbers,
+
+
 
 
 
@@ -298,6 +304,8 @@ ISP (internet service provider) : connects millions of computers together in one
 you need both an IP and MAC address to send or receive data through a network.  You can think of IP address as house address and MAC address as recipient.
     IP address: unique identifer for computer on a networks that serves as an address.
     MAC address: unique identifier that is generally permannent and hard coded onto a device. 
+        OUI: first three octets of mac address that identify manufacturer of a network interface,
+    
 
 packets: smallest units of data that are sent through network, 
 how data moves from client to server and back: data is sent through packets through a series of networks, until it eventually reaches destination and packets are reassembled,
@@ -538,3 +546,5 @@ there are so many resources out there to help you with whatever you are working 
 fixing problems and creating positive interactions with people, are two fundamental skills that can be applied to any situation, including IT,
 look at interviews as opportunity to hone your interpersonal skills, learn more about the company, and make sure that job is good fit for you,
 testing your boundaries and pushing yourself really will drive your success beyond what you think you could achieve,
+
+*/
