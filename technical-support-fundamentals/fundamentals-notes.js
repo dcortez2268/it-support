@@ -51,6 +51,9 @@ time slice: a very short interval of time that gets allocated to a process for c
 hexadecimal: a way to represent numbers using 16 digits, letters abcdef represent 10.11.12.13.14.15,
 octet: any number that can be represented by 8 bits,
 dotted decimal notation: four octets represented by decimal numbers,
+buffer: computing technique where a certain amount of data is held somewhere, before being sent out somewhere else,
+
+
 
 
 
