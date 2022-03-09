@@ -252,7 +252,7 @@ has four columns:
     non routable address space: range of IPs set aside for use by anyone that cannot be routed to, they belong to no one and can be used by anyone
         allows for nodes on network to communicate with each other but no gateway router will attempt to forward traffic to this type of network
 
-    //*************************************************************************************************** 
+//*************************************************************************************************** 
     //  WEEK 3: The Transport Layer and Application Layers
 //***************************************************************************************************
 
@@ -269,10 +269,10 @@ socket address or socket number: ip address denoted by a colon and port number, 
 
 TCP Segment: made up of a TCP header and a data section
 tcp header: 
-    source port: chosen from ephemeral ports, required to keep lots of outgoing connections separate, return address for server replying with data,
-    destination port:
-    sequence number: 32 bit number that's used to keep track of where in a sequence of TCP segments this one is expected to be (since data is often split up bc of ethernet frame size)
-    acknowledgement number: number of the next epected segment,
+source port: chosen from ephemeral ports, required to keep lots of outgoing connections separate, return address for server replying with data,
+destination port:
+sequence number: 32 bit number that's used to keep track of where in a sequence of TCP segments this one is expected to be (since data is often split up bc of ethernet frame size)
+acknowledgement number: number of the next epected segment,
     data offset field: a 4 bit number that communicates how long the tcp header for this segment is, so receiving network device knows where actual data payload begins,
     six tcp control flags: 
     tcp window: 16 bit number that specifies the range of sequence numbers that might be sent before an acknowledgement is required,
@@ -280,35 +280,35 @@ tcp header:
     urgent pointer field: used in conjunction with one of tcp control flags to point out particular segments as more important, rarely used,
     options field: rarely used,
     padding: ensures data payload sections begins at expected location
-
-data section: payload area that encapsulates application layer messages
-
-TCP establishes connections used to send long chains of segments of data in contrast to network, data link layer, and physical layer that send individual packet of data.
-
+    
+    data section: payload area that encapsulates application layer messages
+    
+    TCP establishes connections used to send long chains of segments of data in contrast to network, data link layer, and physical layer that send individual packet of data.
+    
 TCP implements 6 different TCP control flags for communication:
-    URG: indicates that the segment is considered urgent and that the urgent pointer field has more info,
-    ACK: acknowledged,  indicates the acknowledgement number field should be examined,
-    PSH: push, indicates the transmitting device wants the receiving device to push currently buffered data to the application on the receiving end as soon as possible.  Used when you might be sending a very small amount of information that you need the listening program to respond to immediately.  tcp protocol implements buffer because by keeping some amount of data in buffer, tcp can deliver large chunks of data more efficiently. 
-    RST: reset, means that one of the sides in a TCP connection hasn't been able to properly recover from a series of missing or malformed segments.  Basically just saying to start communication process from beginning.
-    SYN: synchronize, used when first establishing a TCP connection and make sure the receiving end knows to examine the sequence number field.  
-    FIN: Finish, indicates the transmitting computer doesn't have any more data to send and the connection can be closed.  
+URG: indicates that the segment is considered urgent and that the urgent pointer field has more info,
+ACK: acknowledged,  indicates the acknowledgement number field should be examined,
+PSH: push, indicates the transmitting device wants the receiving device to push currently buffered data to the application on the receiving end as soon as possible.  Used when you might be sending a very small amount of information that you need the listening program to respond to immediately.  tcp protocol implements buffer because by keeping some amount of data in buffer, tcp can deliver large chunks of data more efficiently. 
+RST: reset, means that one of the sides in a TCP connection hasn't been able to properly recover from a series of missing or malformed segments.  Basically just saying to start communication process from beginning.
+SYN: synchronize, used when first establishing a TCP connection and make sure the receiving end knows to examine the sequence number field.  
+FIN: Finish, indicates the transmitting computer doesn't have any more data to send and the connection can be closed.  
 
 3 way handshake:
-    1. computer a sends tcp segment with SYN flag set. This is computer A of saying... "Let's establish a connection and look at my sequence number field, so we know where this conversation starts."
-    2. computer b sends tcp segment with SYN flag and ACK flag set to indicate, "sure, let's establish a connection and I acknowledger your sequence number."
-    3.  Computer A responds again with just ACK flag saying, " I acknowledge your acknowledgement.  Let's start sending data."
+1. computer a sends tcp segment with SYN flag set. This is computer A of saying... "Let's establish a connection and look at my sequence number field, so we know where this conversation starts."
+2. computer b sends tcp segment with SYN flag and ACK flag set to indicate, "sure, let's establish a connection and I acknowledger your sequence number."
+3.  Computer A responds again with just ACK flag saying, " I acknowledge your acknowledgement.  Let's start sending data."
 
 handshake: a way for two devices to ensure that they're speaking the same protocol and will be able to understand each other.
 
 4 way handshake:
-    1 computer A closing connection sends FIN flag.  
-    2. computer B acknowledges with ACK flag.  Sends FIN flag as well to close connection.
-    3.  computer A sends ACK flag.
+1 computer A closing connection sends FIN flag.  
+2. computer B acknowledges with ACK flag.  Sends FIN flag as well to close connection.
+3.  computer A sends ACK flag.
 
 process of TCP communication:
-    1. 3 way handshake.
-    2. TCP connection operating in full duplex.  Each segment sent in either direction should be responded to by TCP segment with the ACK field set so the other side always knows what has been received.  
-    3. 4 way handshake.
+1. 3 way handshake.
+2. TCP connection operating in full duplex.  Each segment sent in either direction should be responded to by TCP segment with the ACK field set so the other side always knows what has been received.  
+3. 4 way handshake.
 
 
 socket: the instantiation of an end point in a potential TCP connection,
@@ -316,44 +316,313 @@ instantiation: the actual implementation of something defined elsewhere.
 TCP sockets require actual programs to instantiate them whereas a port is more of a virtual description
 
 TCP socket states:
-    You can send traffic to any port you want, but your're only going to get a response if a program has opened a socket on that port.  
+You can send traffic to any port you want, but your're only going to get a response if a program has opened a socket on that port.  
 
-    There are many TCP socket states.  some common ones are:
-    
-    LISTEN: means a tcp socket is ready and listening for incoming connections,
-    SYN_SENT: a synchronization request has been sent, but the connection hasn't established yet,
-    SYN_RECEIVED: socket previously in a listener state, now has received a synchronization request and sent a SYN_ACK back, and has not received a final ACK from client yet,
-    ESTABLISHED: TCP connection is in working order and both sides are free to send each other data.
-    FIN_WAIT: a FIN has been sent, but corresponding ACK from other end hasn't been received yet,
-    CLOSE_WAIT: connection has been closed at the tcp layer, but that the application that opened the socket hasn't been released its hold on the socket yet,
-    CLOSED: the connection has been fully terminated and that no further communication is possible,
+There are many TCP socket states.  some common ones are:
 
-    These are the universal socket states at the TCP layer, but the implementation details like socket states and their names vary from operating system to operating system. When troubleshooting, check the exact socket state definitions for system you are working with.   
+LISTEN: means a tcp socket is ready and listening for incoming connections,
+SYN_SENT: a synchronization request has been sent, but the connection hasn't established yet,
+SYN_RECEIVED: socket previously in a listener state, now has received a synchronization request and sent a SYN_ACK back, and has not received a final ACK from client yet,
+ESTABLISHED: TCP connection is in working order and both sides are free to send each other data.
+FIN_WAIT: a FIN has been sent, but corresponding ACK from other end hasn't been received yet,
+CLOSE_WAIT: connection has been closed at the tcp layer, but that the application that opened the socket hasn't been released its hold on the socket yet,
+CLOSED: the connection has been fully terminated and that no further communication is possible,
+
+These are the universal socket states at the TCP layer, but the implementation details like socket states and their names vary from operating system to operating system. When troubleshooting, check the exact socket state definitions for system you are working with.   
 
 connection oriented protocol: establishes a connection, and uses this to ensure that all data has properly transmitted.  A connection at the transport layer implies that every segment of data sent is acknowledged.  Very important to have because there are a lot of different things that could go wrong when sending data on Internet.  
 
 connectionless protocols: protocols that do not rely on connections.  Instead, you just set a destination port and send the packet, and there are no acknowledgements.  UDP is the most common.  Benefit is getting rid of overhead so you will have more resources for actual data transfer.  useful for messages that aren't super important.    
 
 firewall: device that blocks traffic that meets certain criteria
-    can be used at different layers but most commonly used at the transportation layer,
-    general configuration that enables them to block traffic to certain ports while allowing traffic to other ports,
-    firewalls are sometimes independent network device, but its better to think of them as a program that can run anywhere becuase firewalls can be run on different devices, or on individual hosts because all major modern os have firewall functionality built in
+can be used at different layers but most commonly used at the transportation layer,
+general configuration that enables them to block traffic to certain ports while allowing traffic to other ports,
+firewalls are sometimes independent network device, but its better to think of them as a program that can run anywhere becuase firewalls can be run on different devices, or on individual hosts because all major modern os have firewall functionality built in
 
 The application layer:
-    implements so many different protocols,
-    protocols are standardized across application types, for example web clients and servers use HTTP and use same protocol specifications
+implements so many different protocols,
+protocols are standardized across application types, for example web clients and servers use HTTP and use same protocol specifications
 
 OSI: open systems Interconnection, popular network layer model that has seven layers, and introduces two additional layers between our transport layer and application layer to the TCP IP 5 layer model
-    diagram at ./osi-model.png,
-    session layer:  fifth layer, part of os that is responsible for things like facilitating communication between actual applications and the transport layer,
-    presentation layer: sixth layer, part of os responsible for making sure that the unencapsulated application layer data is actually able to be understood by the application in question, might handle encryption or compression of data,
+diagram at ./osi-model.png,
+session layer:  fifth layer, part of os that is responsible for things like facilitating communication between actual applications and the transport layer,
+presentation layer: sixth layer, part of os responsible for making sure that the unencapsulated application layer data is actually able to be understood by the application in question, might handle encryption or compression of data,
 
-    the reason these layers are both put into application layer in five layer model is because there is not any encapsulation going on
+the reason these layers are both put into application layer in five layer model is because there is not any encapsulation going on
 
 This program notes that the five layer model is the most useful when it comes to day to day business of understanding networking, however the osi 7 layer model is also prevalent.
 
 All the layers working in unison:
-    exercise 
+    exercise takeaways were that when computer is initially ready to send packet, it starts constructing from top down, (layer 5 first then down to layer 1), gets sent to router and operates between layer 3 and 2 until it gets to final destination, then it goes back up from layer 3 to layer 5
+
+    all this is done just for once syn flag, has to repeat for all of the other flags and subsequent data transmission
+
+//*************************************************************************************************** 
+    //  WEEK 4: Introduction to network services
+//***************************************************************************************************
+
+purpose of networking: to ensure networks services can be available to answer requests for the data from clients
+we will be going over network services and technologies that help us make computer networking more user friendly and secure, important to know how to use for troubleshooting networks,
+four things that need to be configured at computer or node on a network:
+    ip address, subnet mask, gateway, dns name server
+    
+    domain name: string of letters that make up a web address
+    
+    
+    DNS, Domain Name System: protocol that maps domain name to IP address: 
+    dns allows distributed servers to serve different IP for same exact domain name in order to tranfer data faster since distributed server will be closer to client, for example, someone in us searching netflix.com would resolve to a different ip address than someone in middle east searching netflix.com in order for both users to get data at fastest speed possible,
+    
+    great example of application layer service that uses UDP for the transport layer instead of TCP, typically done this way, but sometimes uses DNS over TCP when size of DNS lookup reponse is too big for a single UDP datagram
+    
+    dns operates with a set of defined resource Record Types: (data types of dns protocols)
+        there are a lot of different ones and some have very specialized purposes, some main ones below: 
+        A record:
+        used to point a certain domain name at a certain IPv4 IP address, a single domain name can have multiple A records, dns round robin technique implements authorative name server cycling through Ips and knowing about others just in case connection fails,
+        Quad A record:
+        similiar to A record but returns in IPv6 instead of an IPv4 address,
+        CNAME record, (canonical name record):
+        used to redirect traffic from one domain to another,
+        MX record, (mail exchange record):
+        used in order to ensure that email gets delivered to a company's mail server, used only with mail services
+        SRV record, (service record):
+        used to define the location of various specific services, can be used to return specifics about many different service types
+        TXT record, (text) :
+            used to convey additional data intended for other computers to process, has a field that's entirely free form, often used to communicate configuration preferences about network services that you've entrusted other organizations to handle for your domain, 
+            NS or SOA records:
+            used to define authority information about DNS zones
+            
+
+            
+            
+            
+            Name Resolution System: 
+            The process of using DNS to map from domain name to IP address,
+            DNS local name servers have to be specifically configured at a node on a network, 
+            
+            5 types of name servers :
+            caching name servers, recursive name servers, root name servers, tld name servers, authoritative name servers
+            
+            Some servers are both caching and recursive: generally provided by ISP or local network, usually both are together in same 
+            server bc they work together
+            caching servers: purpose is to store domain name lookups for a certain amount of time
+            TTL, Time to live: a value in seconds that can be configured by domain name owner for how long a name server is allowed to cache an entry before it should discard it and perform a full resolution again
+            
+                    some devices have their own temporary dns cache as well that way they do not have to send request to caching server
+                    
+                recursive name servers: ones that perform full DNS resolution requests,
+                
+                steps for a lookup:
+                
+                contact a root name server: they are distributed across the globe via anycast: a technique that's used to route traffic to different destinations depending on factors like location, congestion, or link health, they direct traffic to correct TLD name server,
+                
+                TLD name server, top level domain: the last part of any domain name, represents top of the higharchical dns name resolution system, references which authoritative name server to contact
+                
+                Authoritative name servers: responsible for the last two parts of any domain name which is the resolution at which a 
+                single organization may be responsible for DNS lookups, likely to be controlled by the organization itself that runs the site which finally provides the actual ip of the server
+                
+                also responsible for a specific DNS Zone, 
+                
+                Note ** all are Authoritative name servers but root name and TLD have specific use cases of DNS Zone 
+                
+                Breakdown of a Domain Name:
+                any given domain name has three primary parts, separated by period
+                
+    TLD, Top Level Domain : the last part of a domain name, there are only a certain restricted number of defined TLDs available,
+    
+    Domain: second part of domain name, used to seperate where control moves from a TLD name server to an authoritative name server,
+    must end in one of the predefined TLDs,
+    
+    subdomain: referred to as a host name if it's been assigned to only one host, first part of domain,
+    
+    Fully Qualified Domain Name, FQDN : when you combine all three parts of domain togehter, then you have a FQDN
+    
+    DNS can technically support up to 127 levels of domain in total for a single fully qualified domain name, because you can have 
+    many subdomains,
+    can contain up to 255 characters
+    
+    
+
+    DNS Zones : 
+    allow for easier control over multiple levels of a domain,
+    as number of resource codes in a single domain increases, it becomes harder to manage, so can be configured much easier with multiple DNS Zones,
+    ex: la.largecompany.com, fs.largecompany.com, pa.largecompany.com, each have their own DNS Zone,
+    
+    Contain: 
+    zone files : simple configuration files that declare all resource records for a particular zone, 
+    SOA record, Start of authority resource record declaration: declares zone authorative server name,
+    
+        NS Records: 
+        indicate other name servers that may also be responsible for this zone,
+        
+        
+        reverse lookup zone files: 
+        these let DNS resolvers ask for an IP and get the FqDN associated with it returned, resolves IP to a name
+        
+DHCP, Dynamic Host Configuration Protocol:
+very important to know as IP specialist,
+application layer protocol that automates the configuration process of hosts on a network (operates at application layer but is configuring network layer through process mentioned below),
+maintains a list of every node on the network and its corresponding ip, assigns ips via:
+            dynamic allocation: having list of available ips and assigning these to devices when they need one, 
+            
+            automatic allocation: range of ip addresses is set aside for assignment purposes and assigns the same ip to each machine each time if possible, 
+            
+            fixed allocation: requires a manually specified list of MAC address and their corresponding IPs, when a computer requests an IP, DHCP server looks for its MAc address in a table and assignes the IP that corresponds, or refuses.
+            
+            DHCP can be used to: 
+    used to assign things like IP address, primary gateway, and to assign things like NTP servers
+    
+    DHCP discovery:
+    the process by which a client configured to use DHCP attempts to get network configuration information
+    has four steps:
+    server discovery step:
+    all messages are broadcasted and client recognizes messages for itself because of MAC address,
+    DHCP client sends a DHCPDISCOVER message out onto the network, message that is broadcasted from port 67 to source port 68,
+            server responds with DHCPPOFFER message,
+            DHCP client responds with DHCPREQUEST message, "yes, I would like to have an ip that you offered me",
+            server responds with DHCPACK message,
+            
+            now the network stack on the client computer can now use the configuration information, called the DHCP lease, presented to it by the DHCP server to set up its own network layer configuration
+
+            whenever cleint disconnects from network, it is done with IP  and it can release its DHCP lease to the DHCP server, which returns the ip address to the pool of available ips
+
+            
+            
+            NAT, Network Address Translation:
+            it takes one IP address and translates it into another, 
+            technique instead of a defined standard so implementation details can differ but the concepts of what it accomplishes are pretty constant,
+    
+            implements security safeguards:
+            allows a gateway, usually a router or firewall, to rewrite the source IP of an outgoing IP datagram while retaining the original IP in order to rewrite it into the response, this is how to implement ip madsquerading
+            
+            ip masquerading: hiding IP of one computer from another
+            
+            one to many NAT: when all computers have their outbound traffic traslated via NAT to single IP,
+            router performs ip masquarading for all computers
+            
+            implements workaround for more IPv4 addresses until we can implement all IPv6 addresses:
+        non routable address space:
+        consists of several different IP ranges that anyone can use, internet routers won't forward traffic to it, 
+        the network uses one IP for router and with NAT forwards traffic to computers implementing non routable address space ips
+        
+        
+NAT and the Transport Layer:
+When a router on a one to many NAT network is  receiving incoming messages, it must redirect traffic back to corresponding computer.  Accomplishes this task via: 
+
+port preservation: 
+technique where the source port chosen by a client, is same port used by the router,
+            ends up with router knowing which corresponding computer is with message because same source port from original message sent by client,
+            whenever source port collision, the router will assign to different unused port,
+            
+            port forwarding:
+            technique where a specific destination ports can be configured to always be delivered to specific nodes ( so client doesn't have to know ip of server, just ip of router). 
+        this technique allows for ip masquerading because response traffic source ip is rewritten by router w router ip,
+        simplifies how external users might interact with lots of services all run by the same organization,
+
+        
+        VPNS, virtual private networks :
+        technology that use encrypted tunnels to allow for a remote computer or network to act as if it's connected to a network that it's not actually physically connected to,
+        is a tunneling protocol: protocol that provisions access to something not locally available
+        
+        vpn client establishes vpn tunnel that assigns your computer an ip that matches address space of network you connect to, 
+        allows you to send data out of this virtual interface and access the corresponding network,
+        most require two factor authentication,
+        
+        have a lot of different flavors that accomplish many different things,
+        most work by using the payload section of the transport layer to carry an encrypted payload that actually contains an entire second set of packets: the network, transport, and application layers intended to traverse the remote network.
+        
+
+        two factor authentication: a technique where more than just a username and password are required to authenticate
+
+        Proxy Services:
+    a server that acts on behalf of a client in order to access another service, doesn't refer to any specific implementation,
+    sit between clients and other servers to provide: anonymity, security, content filtering, increased performance, and more.
+    
+    ex is a gateway router because gateway router meets definition,
+    
+    web proxies:
+    proxies built for web traffic,
+    some purposes include:
+    increase performance: cache data, (pretty old and not really used today),
+    prevent someone from accessing sites, proxy denies or grants request to clients based on configs,
+    
+    reverse proxy:
+    a service that might appear to be a single server to external clients, but actually represents many servers living behind it
+    popular websites implement with single server as entry point to requests and distributes these requests to different servers, form of load balancing,
+    
+    popular websites implement to deal with decryption because reverse proxies have special hardware.  leaves web servers to be free to just serve content.
+    
+    
+//*************************************************************************************************** 
+    //  WEEK 5: Introduction to connecting to network
+//***************************************************************************************************
+    
+    Plain Old Telephone Service, POTS: the public switched telephone network,
+    USENET: system developed by two duke grad students in 1970 to implement transmitting data using the POTS system,
+
+    dial up connection: uses POTS for data transfer, and gets its name because the connection is established by actually dialing a phone number,
+    modem, modulator demodulator: take data that computers can understand and turn them into audible wavelengths that can be transmitted over pots, used to transfer data over a dial up connection,
+
+
+
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+
+
+    
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
 
 
 

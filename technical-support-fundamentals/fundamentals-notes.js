@@ -336,6 +336,7 @@ TCP/IP protocol (Transmission Control Protocol/Internet Protocol) : predominant 
 URL, Uniform Resource Locator: web address,
 DNS, Domain Name System: protocol that maps web address to IP address,
 ICANN, Internet Corporation for Assigned Names and Numbers: when a domain gets taken it gets registered to ICANN and cannot be taken by anyone else unless you make available again.
+IANA: in charge of distributing IPs
 
 LIMITATIONS OF INTERNET:
     Ipv4: current version of IP addresses, number of usable IP addresses have run out,
@@ -549,5 +550,7 @@ there are so many resources out there to help you with whatever you are working 
 fixing problems and creating positive interactions with people, are two fundamental skills that can be applied to any situation, including IT,
 look at interviews as opportunity to hone your interpersonal skills, learn more about the company, and make sure that job is good fit for you,
 testing your boundaries and pushing yourself really will drive your success beyond what you think you could achieve,
+focus on maximizing your potential, and everything will fall into place,
+do IT as your starting ground to get a good foundation, it gives you opportunity to try a bunch of different things and then slowly start to move into more of a specialization if you'd like to
 
 */
