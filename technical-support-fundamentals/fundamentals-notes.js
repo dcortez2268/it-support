@@ -551,6 +551,8 @@ fixing problems and creating positive interactions with people, are two fundamen
 look at interviews as opportunity to hone your interpersonal skills, learn more about the company, and make sure that job is good fit for you,
 testing your boundaries and pushing yourself really will drive your success beyond what you think you could achieve,
 focus on maximizing your potential, and everything will fall into place,
-do IT as your starting ground to get a good foundation, it gives you opportunity to try a bunch of different things and then slowly start to move into more of a specialization if you'd like to
+do IT as your starting ground to get a good foundation, it gives you opportunity to try a bunch of different things and then slowly start to move into more of a specialization if you'd like to,
+
+
 
 */
