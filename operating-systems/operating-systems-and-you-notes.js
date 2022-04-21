@@ -27,9 +27,6 @@ hotkey: keyboard shortcut,
 wildcard: character that's used to help select files based on a certain pattern,
 
 
-
-
-
 Basic Commands:
     Lesson Overview and Practice Tips:
         it is much easier to understand and remember information if you practice and type out commands along with lesson,
@@ -199,7 +196,50 @@ File and Text Manipulation:
         grep stringToSearchFor path: allows you to search file or files for string
 
     Windows: Input, Output, and the Pipeline:
+        in powershell echo is alias for Write-Output
+        every windows process and every powershell command can take input and can produce output via I/O streams, or input output streams,
+        three different streams every windows process has:
+            stdin: standard in
+            stdout: standard out, 1
+            stderr: standard error, 2
+            there are also a couple more streams but these ^ are most important to know
+
+        you can think of streams as literal streams, or rivers.  you provide input to process by adding things to the stdin stream which flows into process.
+        when the process creates output, it adds data to the stdout stream, which flows out of the process.
+
+        >, redirect operator : allows us to change where we want our standard output to go,
+        >>, redirect operator: we can use to append information to a file without overwriting an existing file,
+        |, pipe operator: allows us to send the output of one command to the input of another command,
+            ex: cat words.txt | select-string st >st-words.txt
+
+        $null: special variable that contains definition of nothing.  basically just a placeholder to redirect output if you do not wish to do anything 
+                with output.
+        Get-Help about_redirection: contains useful information to learn more about redirection
+
+    Linux: Input, Output, and the Pipeline:
+        three different streams for linux:
+            stdin: standard in
+            stdout: standard out, 1
+            stderr: standard error, 2
+
+        echo is used in same way as in windows ^, echo writes output,
+        >, redirect operator : allows us to change where we want our standard output to go,
+        >>, redirect operator: we can use to append information to a file without overwriting an existing file,
+        <, standard in operator: allows us to get input from different stream than keyboard,
+            cat < file-input.txt
+
+        /dev/null: special file that contains definition of nothing.  basically just a placeholder to redirect output if you do not wish to do anything 
+                with output.
+
+        |, pipe operator: allows us to send the output of one command to the input of another command,
+            ex: ls -la /etc | grep bluetooth
+
     Windows and Linux Advanced Navigation:
+        regular expressions: used to help you do advanced pattern-based selection,
+        there is so much more to cli, be sure to check out resources bookmarked!
+    
+
+
 
 
 
