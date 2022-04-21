@@ -23,6 +23,10 @@ flag: in Linux, a flag is a way to specify additional options for a command, usu
     you can see what options are available for flags by typing --help flag,
     flags in linux can be appended together and work exactly the same as if flags are listed separately,
 tab completion: lets us use tab key to auto complete file names and directories,
+hotkey: keyboard shortcut,
+wildcard: character that's used to help select files based on a certain pattern,
+
+
 
 
 
@@ -106,14 +110,97 @@ Basic Commands:
 
 
     Windows: copying files and directories:
-        
+        copying file:    
+            right click, copy, then paste,
+            hotkey for copy is ctrl-c,
+            hotkey for paste is ctrl-v,
+            powershell: cp fileNameToCopy locationToPaste
+        copying directory:
+            cp 'directoryName' locationName -recurse -verbose: copies directory and all contents to location
 
     Linux: copying files and directories:
+        copying file:
+            cp fileNameToCopy locationToPaste
+        copying directory:
+            cp -r 'directoryName' locationName: copies directory and all contents to location
+    
     Windows: moving and renaming files, directories :
+        renaming in GUI: right click, click rename
+        command line: 
+            mv fileNameToMove newFileName  : (renaming file), moving file without changing directory that it's stored in
+            mv fileNameToMove directoryName  :  moving file to directoryName
+
     Linux: moving and renaming files, directories :
+        mv fileNameToMove newFileName  : (renaming file), moving file without changing directory that it's stored in
+        mv fileNameToMove directoryName  :  moving file to directoryName
+
     Windows: removing files, directories :
+        GUI: right click, click delete, go to recycle bin and delete file   
+        command line:
+            rm fileName: deletes file without moving to recycle bin, some files cannot be removed this way due to permissions that protect files
+            rm directoryName: deletes directory and  all files within directory, prompts user if they wish to do this
+            rm directoryName -recurse: deletes directory and  all files within directory
+            
     Linux: removing files, directories :
+        rm fileName: deletes file, some files cannot be removed this way due to permissions that protect files
+        rm -r directoryName: deletes directory and  all files within directory
+
+
 File and Text Manipulation:
+    Windows: Display File Contents:
+        GUI: double click file
+        powershell: 
+            cat pathName : dumps contents of file into shell
+            more pathName: gets contents of file and pauses once it fills terminal window, enter key advances file by one line, space by one page, q quits
+            cat pathName -Head 10 : displays first ten lines of file
+            cat pathName -Tail 10: displays last ten lines of file
+
+    Linux: Display File Contents:
+        cat pathName : dumps contents of file into shell
+        less pathName: less is similar to more for windows, but has more functionality, up and down keys, g moves to beginning of file, G moves to end of 
+                    file, /word_search allows you to search for word_search in file, q allows you to quit
+        head pathName: by default shows you the first ten lines of a file,
+        tail pathName: by default shows you the last ten lines of a file,
+
+    Windows: Modifying Text Files:
+        recommends Notepad++ because it is great for basic editing and supports many file types
+        start Notepad++ path: this CLI command opens up file in Notepad++
+        mentions there is also an editor in CLI called Vim but recommends using Notepad++ over Vim
+
+    Linux: Modifying Text Files:
+        there are many popular text editors for Linux
+        Nano: popular editor found on nearly every distribution
+        nano path: opens up file in nano text editor, at bottom you see different options denoted with ^ carat symbol, to use commands type ctrl+letter
+
+    Windows Powershell:
+        so far the commands we have been using in Powershell are aliases for actual Powershell commands,
+        Get-Alias aliasCommandName : shows what the actuall Powershell command is that gets executed when alias is run
+            example is ls, ls is alias for Get-ChildItem
+        cmd.exe commands: commands from old msDos days of Windows but can still be run due to backwards compatibility
+            dir, dir points to Get-ChildItem
+            cmd.exeCommandName /?: gets help with cmd.exe commands like Get-alias does for alias commands
+
+    Windows: searching within files:
+        crtl-f: search for a word within a file
+        Windows search service: indexes files on your computer by looking through them on a schedule,
+                                by default, often enabled for files in your home directory but not entire hard drive,
+                                lets you find files based on their name, path, last time modified, size, or other details, but by default not contents of file
+                                you can modify search to allow you to search for contents of file, find by typing indexing options in start menu, users -> advanced -> file types tab -> index properties and file contents, now you can search by content after reindexing is complete in windows search bar
+        we can also search file content with Notepad++: open up Notepad++ and press ctrl-shift-f to open the find in files dialog
+        
+        cli:
+            select-string stringToSearchFor path: select-string command allows you to find words or other strings of characters and files,
+                                                you can search multiple files with regular expressions for path like wildcard
+            
+    Windows: searching within Directories:
+        ls path -Recurse -Filter *.fileExtension: the -filter parameter will filter the results for file names that match a pattern
+
+    Linux: searching within files:
+        grep stringToSearchFor path: allows you to search file or files for string
+
+    Windows: Input, Output, and the Pipeline:
+    Windows and Linux Advanced Navigation:
+
 
 
 //*************************************************************************************************** 
