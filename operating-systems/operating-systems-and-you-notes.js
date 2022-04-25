@@ -130,6 +130,7 @@ Basic Commands:
     Linux: moving and renaming files, directories :
         mv fileNameToMove newFileName  : (renaming file), moving file without changing directory that it's stored in
         mv fileNameToMove directoryName  :  moving file to directoryName
+        mv path . : copies file from path to current directory
 
     Windows: removing files, directories :
         GUI: right click, click delete, go to recycle bin and delete file   
@@ -194,6 +195,13 @@ File and Text Manipulation:
 
     Linux: searching within files:
         grep stringToSearchFor path: allows you to search file or files for string
+                                    options and flags: 
+                                                -r: search recursively
+                                                -w: match the whole word
+                                                -n: only in line number
+                                                -e: match pattern
+                                                --include and --exclude: include and exclude files in the search
+                                                --include-dir and --exclude-dir: include or exclude directories in the search
 
     Windows: Input, Output, and the Pipeline:
         in powershell echo is alias for Write-Output
@@ -228,8 +236,8 @@ File and Text Manipulation:
         <, standard in operator: allows us to get input from different stream than keyboard,
             cat < file-input.txt
 
-        /dev/null: special file that contains definition of nothing.  basically just a placeholder to redirect output if you do not wish to do anything 
-                with output.
+        /dev/null: special file that contains definition of nothing.  basically just a placeholder to redirect output if you do not wish to do  
+                    anything with output.
 
         |, pipe operator: allows us to send the output of one command to the input of another command,
             ex: ls -la /etc | grep bluetooth
@@ -237,7 +245,12 @@ File and Text Manipulation:
     Windows and Linux Advanced Navigation:
         regular expressions: used to help you do advanced pattern-based selection,
         there is so much more to cli, be sure to check out resources bookmarked!
-    
+
+    Lab Notes for Linux:
+        touch path -c: By default, the touch command is used to change the modification and access times of a file. If the file doesn't exist, the 
+                    touch command is used to create a file with default permissions. -c: do not create file if it doesn't exist
+        cp sourceFile/Directory targetfile/Directory: The cp command is used to make a copy of one or more directories or files. The command takes 
+                                                at least one source name and one target name. If the target is a file, then the source must also be a file. A copy f the source will be made with the new name supplied in target. If the target name isn't specified, a copy of source will be made in the target directory under the same name. If a file with the target name already exists in the target directory, it'll be replaced. If the target is an existing directory, then all sources (one or more) will be copied into the target directory. If the target is a directory that doesn't exist, then the source must also be a directory. A copy of the directory and its contents will be made in target under the same nam
 
 
 
